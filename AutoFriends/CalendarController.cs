@@ -19,7 +19,6 @@ namespace AutoFriends
         // at ~/.credentials/calendar-dotnet-quickstart.json
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Google Calendar API .NET Quickstart";
-        static Events EventsList;
 
         public List<Friend> updateLastHangout(List<Friend> friends)
         {
@@ -28,17 +27,11 @@ namespace AutoFriends
             // look for friend's name in event
             // if that event was more recent, update the DB
 
-            foreach (Friend friend in friends)
-            {
-                //foreach (Event event in )
-                //{
-                    
-                //}
-            }
+
             return friends;
         }
 
-        public Events getCalendarEvents()
+        public void setup()
         {
             UserCredential credential;
 
@@ -66,16 +59,11 @@ namespace AutoFriends
             });
 
             // Define parameters of request.
-            //EventsResource.ListRequest request = service.Events.List("primary");
-            // TODO: retrieve this from the user
-            String calendarID = "huqtgktdtsc2r4etdrnaq1gt9k@group.calendar.google.com";
-            EventsResource.ListRequest request = service.Events.List(calendarID);
-            //request.TimeMin = DateTime.Now;
-            request.TimeMax = DateTime.Now;
+            EventsResource.ListRequest request = service.Events.List("primary");
+            request.TimeMin = DateTime.Now;
             request.ShowDeleted = false;
             request.SingleEvents = true;
-            //request.MaxResults = 10;
-            //request.OrderBy = EventsResource.ListRequest.;
+            request.MaxResults = 10;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             // List events.
@@ -98,8 +86,7 @@ namespace AutoFriends
                 Console.WriteLine("No upcoming events found.");
             }
             Console.Read();
-            EventsList = events;
-            return events;
+
         }
     }
 }
