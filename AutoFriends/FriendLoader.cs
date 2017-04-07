@@ -152,7 +152,7 @@ namespace AutoFriends
             // query Google Calendar for updates to Friends List
             CalendarController calendar = new CalendarController();
             // TODO: this should be in the FriendLoader class init
-            calendar.setup();
+            calendar.getCalendarEvents();
             friends = calendar.updateLastHangout(friends);
             return 0;
         }
